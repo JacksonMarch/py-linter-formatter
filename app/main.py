@@ -1,12 +1,12 @@
 def format_linter_error(error: dict) -> dict:
     return {
-        new: error.get(old, "flake8")
-        for new, old in [
+        new_key: error.get(old_key, "flake8")
+        for new_key, old_key in [
             ("line", "line_number"),
             ("column", "column_number"),
             ("message", "text"),
             ("name", "code"),
-            ("source", "source")  # "source" немає в error, тому спрацює default у .get()
+            ("source", "source")
         ]
     }
 
@@ -24,7 +24,4 @@ def format_linter_report(linter_report: dict) -> list:
     return [
         format_single_linter_file(file_path, file_errors)
         for file_path, file_errors in linter_report.items()
-        ]
-
-
-
+    ]
